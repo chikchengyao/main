@@ -117,13 +117,15 @@ Format:
 -Example:
 `edit complete milestone t/2018.09.18 d/a updated detailed description of what needs to be done`
 
-==== Adding a dependency to a Task: `dependency`
+==== Adding/Removing a dependency to a Task: `dependency`
 [%hardbreaks]
-Adds a dependency to a task dependant to the task dependee
+Adds/removes a dependency to a task dependant to the task dependee (toggling task dependency)
 Format:
-`edit INDEX_DEPENDANT INDEX_DEPENDEE`
+`dependency INDEX_DEPENDANT INDEX_DEPENDEE`
+
 +Example:
 `dependency 1 2`
+
 -Example:
 `dependency 1`
 `dependency a b`

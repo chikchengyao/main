@@ -100,6 +100,14 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!internalList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+        //Remove all dependencies on task to be remove
+        for (int i = 0; i < internalList.size(); i++) {
+            Task task = internalList.get(i);
+            if (task.isDependentOn(toRemove)) {
+                Task newTask = createUndependantTask(task, toRemove);
+                internalList.set(i, newTask);
+            }
+        }
     }
 
     public void setTasks(UniqueTaskList replacement) {
@@ -142,6 +150,23 @@ public class UniqueTaskList implements Iterable<Task> {
         return new Task(taskToEdit.getName(), taskToEdit.getDueDate(), taskToEdit.getPriorityValue(),
                 taskToEdit.getDescription(), taskToEdit.getLabels(), Status.OVERDUE,
                 taskToEdit.getDependency());
+    }
+
+    /**
+     * Returns a {@code Task} with the dependency removed.
+     * @param dependantTask An immutable task passed to have its attributes copied
+     * @return A new immutable task similar to dependantTask but without dependency to dependee
+     */
+    public static Task createUndependantTask(Task dependantTask, Task dependeeTask) {
+        return new Task(
+                dependantTask.getName(),
+                dependantTask.getDueDate(),
+                dependantTask.getPriorityValue(),
+                dependantTask.getDescription(),
+                dependantTask.getLabels(),
+                dependantTask.getStatus(),
+                dependantTask.getDependency().removeDependency(dependeeTask)
+        );
     }
 
     /**
