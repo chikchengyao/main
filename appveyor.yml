@@ -4,6 +4,9 @@
 # Call on gradle to build and run tests
 # --no-daemon: Prevent the daemon from launching to prevent file-in-use errors
 #     when we cache the ~/.gradle directory
+init:
+    - tzutil /s "Singapore Standard Time"
+
 build_script:
     - gradlew.bat --no-daemon assemble checkstyleMain checkstyleTest
 
