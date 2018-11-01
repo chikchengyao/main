@@ -1,41 +1,83 @@
-# User Guide
+= WatchOver - User Guide
+:site-section: UserGuide
 :toc:
 :toc-title:
-:toclevels: 2
+:toc-placement: preamble
+:toclevels: 3
 :sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/CS2103-AY1819S1-F11-3/main
 
-## Features
+By: `Team F11-3`      Since: `Aug 2018`      Licence: `MIT`
 
-### System Commands
-#### Viewing help: `help`
+== Introduction
+
+WatchOver is for those who *prefer to use a desktop app for managing tasks*. More importantly, WatchOver is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, WatchOver enables you to manage your tasks faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+
+== Quick Start
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Download the latest `watchover.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your task manager.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::ActualUi.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try:
+
+* *`list`* : lists all tasks
+* **`add`**`n/Do CS2103 tutorial t/02-12-18 1330 p/5 d/Do it for Jelena l/tutorial` : adds a task named `Do 2103 tutorial` to the task manager.
+* **`delete`**`3` : deletes the 3rd task shown in the current list
+* *`exit`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Count eggs`.
+* Items in square brackets are optional e.g `n/NAME [l/LABEL]` can be used as `n/Count eggs l/tutorial` or as `n/Count eggs`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[l/LABEL]...` can be used as `{nbsp}` (i.e. 0 times), `l/tutorial`, `l/tutorial l/skipped` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PRIORITY_VALUE`, `p/PRIORITY_VALUE n/NAME` is also acceptable.
+* `+Example` indicates positive example while `-Example` indicates negative example.
+====
+
+=== System Commands
+==== Viewing help: `help`
 
 Displays and explains commonly used commands. +
 Format: `help`
 
-#### Undoing the previously command: `undo`
+==== Undoing the previously command: `undo`
 Reverses the most recent command. +
 Format: `undo`
 
-#### Redoing the previously undone command: `redo`
+==== Redoing the previously undone command: `redo`
 Reverses the most recent undo command. +
 Format: `redo`
 
-#### Listing entered commands: `history`
+==== Listing entered commands: `history`
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
 
-#### Exiting the program: `exit`
+==== Exiting the program: `exit`
 Exits the program. +
 Format: `exit`
 
----
-
-### Task Management
-
-* _+Example indicates positive example_
-* _-Example indicates negative example_
-
-#### Adding a Task: `add`
+=== Task Management
+==== Adding a Task: `add`
 [%hardbreaks]
 Adds a task to the task manager.
 Format:
@@ -58,14 +100,14 @@ Task <INDEX>, <TASK_NAME> was created.
 `add n/complete milestone t/2018/09/14 p/important`
 `add n/complete milestone t/2018/09/14 p/-4`
 
-#### Deleting a Task: `delete`
+==== Deleting a Task: `delete`
 [%hardbreaks]
 Deletes a task from the task manager
 Format: `delete INDEX`
 +Example: `delete 1`
 -Example: `delete task`
 
-#### Editing a Task: `edit`
+==== Editing a Task: `edit`
 [%hardbreaks]
 Edits a task in the task manager
 Format:
@@ -75,7 +117,7 @@ Format:
 -Example:
 `edit complete milestone t/2018.09.18 d/a updated detailed description of what needs to be done`
 
-#### Adding a dependency to a Task: `dependency`
+==== Adding a dependency to a Task: `dependency`
 [%hardbreaks]
 Adds a dependency to a task dependant to the task dependee
 Format:
@@ -86,7 +128,7 @@ Format:
 `dependency 1`
 `dependency a b`
 
-#### Completing a Task: `complete`
+==== Completing a Task: `complete`
 [%hardbreaks]
 Completes task(s) in the task manager
 Format: `complete INDEX` or `complete t/LABEL`
@@ -103,7 +145,7 @@ _Note that completion via label is case-sensitive_
 condition:
 ** Has at least one task which is labelled `x` and status is not "COMPLETED"
 
-#### Listing Tasks: `list`
+==== Listing Tasks: `list`
 [%hardbreaks]
 Shows a list of all tasks.
 
@@ -130,31 +172,50 @@ Format:
 3. Induce Happiness DueDate: 03-10-18 Description: conditions of happiness PriorityValue: 3 Status: OVERDUE
 ```
 
-#### Search for Tasks by Keyword: `find`
+==== Search for Tasks by Keyword: `find`
 [%hardbreaks]
 Format: `find KEYWORD`
 +Example: `find complete`
 
+=== Gamification
+==== Display achievements across a time period: `achievements`
+[%hardbreaks]
+Displays the cumulative achievements of a user across a specified time period on the GUI.
+Such achievements include current level, xp earned and number of tasks completed across that time period.
+Format: `achievements TIME_SPAN`, a valid TIME_SPAN may take the vale of `all-time`, `today`, or `this week`.
 
-## Command Summary
+[%hardbreaks]
++Example: `achievements all-time`
++Example: `achievements today`
++Example: `achievements this week`
+-Example: `achievements all time`
+-Example: `achievements TODAY`
+
+== FAQ
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WatchOver folder.
+
+== Command Summary
 
 * System Commands
-`help`
-`undo`
-`redo`
-`history`
-`exit`
+** *Help* : `help`
+** *Undo* : `undo`
+** *Redo* : `redo`
+** *History* : `history`
+** *Exit* : `exit`
 
 * Task Management
 
-** `add n/TASK_NAME t/DUE_DATE p/PRIORITY_VALUE [d/detailed description] [l/LABEL]`
+** *Add* : `add n/TASK_NAME t/DUE_DATE p/PRIORITY_VALUE [d/detailed description] [l/LABEL]`
 
-** `delete INDEX`
+** *Delete* : `delete INDEX`
 
-** `edit INDEX [t/DUE_DATE] [p/PRIORITY_VALUE] [d/detailed description] [l/LABEL]`
+** *Edit* : `edit INDEX [t/DUE_DATE] [p/PRIORITY_VALUE] [d/detailed description] [l/LABEL]`
 
-** `complete INDEX` or `complete l/LABEL`
+** *Complete* : `complete INDEX` or `complete l/LABEL`
 
-** `list`
+** *List* : `list`
 
-** `find KEYWORD`
+** *Find* : `find KEYWORD`
+** *Achievements* : `achievements TIME_SPAN`
